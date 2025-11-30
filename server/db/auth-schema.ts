@@ -1,24 +1,24 @@
 import { relations } from "drizzle-orm";
-import { index, int, integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { index, integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
 export const user = sqliteTable("user", {
-  id: int().primaryKey({ autoIncrement: true }),
+  id: text().primaryKey(),
   name: text().notNull(),
   email: text().notNull().unique(),
   emailVerified: integer({ mode: "boolean" }).default(false).notNull(),
   image: text(),
   createdAt: integer().notNull(),
-  updatedAt: integer().notNull().$onUpdate(() => /* @__PURE__ */ Date.now()),
+  updatedAt: integer().notNull().$onUpdate(() => Date.now()),
 });
 
 export const session = sqliteTable(
   "session",
   {
-    id: int().primaryKey({ autoIncrement: true }),
+    id: text().primaryKey(),
     expiresAt: integer().notNull(),
     token: text().notNull().unique(),
     createdAt: integer().notNull(),
-    updatedAt: integer().notNull().$onUpdate(() => /* @__PURE__ */ Date.now()),
+    updatedAt: integer().notNull().$onUpdate(() => Date.now()),
     ipAddress: text(),
     userAgent: text(),
     userId: text().notNull().references(() => user.id, { onDelete: "cascade" }),
@@ -29,7 +29,7 @@ export const session = sqliteTable(
 export const account = sqliteTable(
   "account",
   {
-    id: int().primaryKey({ autoIncrement: true }),
+    id: text().primaryKey(),
     accountId: text().notNull(),
     providerId: text().notNull(),
     userId: text().notNull().references(() => user.id, { onDelete: "cascade" }),
@@ -41,7 +41,7 @@ export const account = sqliteTable(
     scope: text(),
     password: text(),
     createdAt: integer().notNull(),
-    updatedAt: integer().notNull().$onUpdate(() => /* @__PURE__ */ Date.now()),
+    updatedAt: integer().notNull().$onUpdate(() => Date.now()),
   },
   table => [index("account_userId_idx").on(table.userId)],
 );
@@ -49,12 +49,12 @@ export const account = sqliteTable(
 export const verification = sqliteTable(
   "verification",
   {
-    id: int().primaryKey({ autoIncrement: true }),
+    id: text().primaryKey(),
     identifier: text().notNull(),
     value: text().notNull(),
     expiresAt: integer().notNull(),
     createdAt: integer().notNull(),
-    updatedAt: integer().notNull().$onUpdate(() => /* @__PURE__ */ Date.now()),
+    updatedAt: integer().notNull().$onUpdate(() => Date.now()),
   },
   table => [index("verification_identifier_idx").on(table.identifier)],
 );
