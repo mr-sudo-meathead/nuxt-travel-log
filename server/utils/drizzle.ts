@@ -1,4 +1,4 @@
-import * as schema from "@@/server/db/schema";
+import * as schema from "@@/server/db/index";
 import env from "#shared/env";
 import { drizzle } from "drizzle-orm/libsql";
 

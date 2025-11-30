@@ -5,7 +5,7 @@ import env from "./shared/env";
 
 export default defineConfig({
   out: "./server/db/migrations",
-  schema: "./server/db/schema.ts",
+  schema: "./server/db/index.ts",
   casing: "snake_case",
   dialect: "turso",
   dbCredentials: {
