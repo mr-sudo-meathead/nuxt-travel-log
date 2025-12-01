@@ -14,10 +14,11 @@ const route = useRoute();
   <div class="px-2 py-1.5">
     <div class="tooltip-right" :class="{ tooltip: !showLabel }" :data-tip="showLabel ? undefined : props.label">
       <NuxtLink
+        :to="props.href"
         :class="{ 'bg-base-100': route.path === props.href }"
         class="rounded-md flex justify-start gap-2 p-3 hover:bg-base-100 hover:cursor-pointer"
       >
-        <Icon :to="props.href" :name="props.icon" :size="props.size" />
+        <Icon :name="props.icon" :size="props.size" />
         <Transition name="grow">
           <span v-if="showLabel">
             {{ props.label }}
