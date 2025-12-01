@@ -15,10 +15,12 @@ const authStore = useAuthStore();
       </div>
     </summary>
     <ul class="menu dropdown-content bg-base-200 rounded-box z-1 w-52 p-2 shadow-sm">
-      <NuxtLink to="/sign-out" class="flex flex-row items-center gap-2 hover:bg-gray-50/5 hover:rounded">
-        <a>Sign out</a>
-        <Icon name="tabler:door-exit" />
-      </NuxtLink>
+      <li>
+        <NuxtLink to="/sign-out">
+          <a>Sign out</a>
+          <Icon name="tabler:logout-2" />
+        </NuxtLink>
+      </li>
     </ul>
   </details>
   <button v-else :disabled="authStore.loading" class="btn bg-green-500" @click="authStore.signIn">
